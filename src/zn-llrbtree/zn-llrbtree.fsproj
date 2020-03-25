@@ -6,12 +6,13 @@
   </PropertyGroup>
   <PropertyGroup>
     <Title>zn-llrbtree</Title>
-    <Description>zn-llrbtree does the thing!</Description>
+    <Description>Left-Leaning Red-Black Tree</Description>
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <Optimize>true</Optimize>
     <Tailcalls>true</Tailcalls>
+    <IsPackable>true</IsPackable>
     
   </PropertyGroup>
   <ItemGroup>

@@ -225,7 +225,9 @@ var assemblies = [
     "name": "zn-llrbtree",
     "classes": [
       { "name": "System.AssemblyVersionInformation", "rp": "zn_llrbtree_AssemblyVersionInformation.htm", "cl": 0, "ucl": 0, "cal": 0, "tl": 0, "ct": "MethodCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "zn_llrbtree.Say", "rp": "zn_llrbtree_Say.htm", "cl": 4, "ucl": 0, "cal": 4, "tl": 58, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "ZN.DataStructures.Color", "rp": "zn_llrbtree_Color.htm", "cl": 0, "ucl": 0, "cal": 0, "tl": 0, "ct": "MethodCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "ZN.DataStructures.LLRBTreeModule", "rp": "zn_llrbtree_LLRBTreeModule.htm", "cl": 150, "ucl": 5, "cal": 155, "tl": 366, "ct": "LineCoverage", "mc": "-", "cb": 133, "tb": 152, "lch": [], "bch": [], "hc": [] },
+      { "name": "ZN.DataStructures.LLRBTree`1", "rp": "zn_llrbtree_LLRBTree_1.htm", "cl": 0, "ucl": 0, "cal": 0, "tl": 0, "ct": "MethodCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
     ]},
 ];
 

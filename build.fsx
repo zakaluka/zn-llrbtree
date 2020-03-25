@@ -16,6 +16,7 @@ open Fake.Core.TargetOperators
 open Fake.Api
 open Fake.BuildServer
 open Fantomas
+open Fantomas.FormatConfig
 open Fantomas.FakeHelpers
 
 BuildServer.install [
@@ -557,6 +558,13 @@ let githubRelease _ =
     |> Async.RunSynchronously
 
 let formatCode _ =
+    let fantomasConfig =
+        match CodeFormatter.ReadConfiguration(Shell.pwd()) with
+        | Success c -> c
+        | _ ->
+            printfn "Cannot parse fantomas-config.json, using default"
+            FormatConfig.Default
+
     [
         srcCodeGlob
         testsCodeGlob
@@ -564,7 +572,7 @@ let formatCode _ =
     |> Seq.collect id
     // Ignore AssemblyInfo
     |> Seq.filter(fun f -> f.EndsWith("AssemblyInfo.fs") |> not)
-    |> formatFilesAsync FormatConfig.FormatConfig.Default
+    |> formatFilesAsync fantomasConfig
     |> Async.RunSynchronously
     |> Seq.iter(fun result ->
         match result with
