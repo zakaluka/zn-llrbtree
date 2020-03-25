@@ -6,10 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2017-03-17
-First release
+## [0.1.0] - 2020-03-24
+First release.  Based on the Elm implementation at https://github.com/Skinney/core/blob/a2ae7fcc30bd1ca2d5c732f98f61e4fd1f7b288b/src/Dict.elm
 
 ### Added
-- This release already has lots of features
+- Initial API for the tree
+- Unit tests for basic functionality
+- Property-based tests
 
-[0.1.0]: https://github.com/user/MyCoolNewLib.git/releases/tag/v0.1.0
+[0.1.0]: https://github.com/zakaluka/zn-llrbtree.git/releases/tag/v0.1.0
