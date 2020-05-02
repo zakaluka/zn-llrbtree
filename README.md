@@ -1,6 +1,6 @@
 # zn-llrbtree
 
-[Enter useful description for zn-llrbtree]
+Left-leaning red-black tree implementation in F#.  More information can be found on [Wikipedia](https://en.wikipedia.org/wiki/Left-leaning_red%E2%80%93black_tree).
 
 ---
 
