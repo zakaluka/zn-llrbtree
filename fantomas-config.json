@@ -12,5 +12,5 @@
   "SpaceAroundDelimiter": true,
   "SpaceBeforeArgument": false,
   "SpaceBeforeColon": false,
-  "StrictMode": true
+  "StrictMode": false
 }
