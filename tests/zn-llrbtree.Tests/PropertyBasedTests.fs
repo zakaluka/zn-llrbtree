@@ -4,7 +4,7 @@ open Expecto
 open Hedgehog
 open ZN.DataStructures
 
-[<Tests>]
+// [<Tests>]
 let addTests =
   testList "Property-Based Tests"
     [ testCase "Values are in order" <| fun _ ->
