@@ -197,8 +197,8 @@ let addTests =
   testList "Property-Based Tests"
     [
       ``Values are in order``
-    //   ``Min and Max``
-    //   Add
+      ``Min and Max``
+      Add
     //   Remove
     //   ``Remove 2``
     //   ``Add and Remove``
