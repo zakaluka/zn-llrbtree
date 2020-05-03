@@ -147,8 +147,8 @@ let ``tryPick and Pick`` =
     }
     |> Property.check
 
-let ``forall`` =
-  testCase "forall" <| fun _ ->
+let ``Forall`` =
+  testCase "Forall" <| fun _ ->
     property {
       let! g = Gen.array <| Range.exponential 1 5000
                <| Gen.int
@@ -162,8 +162,8 @@ let ``forall`` =
     }
     |> Property.check
 
-let ``collect`` =
-  testCase "collect" <| fun _ ->
+let ``Collect`` =
+  testCase "Collect" <| fun _ ->
     property {
       let! g = Gen.array <| Range.exponential 1 5000
                <| Gen.int
@@ -196,16 +196,16 @@ let ``Intersection with itself`` =
 let addTests =
   testList "Property-Based Tests"
     [
-      ``Values are in order``
+      ``Add and Remove``
+      ``Difference with itself``
+      ``Intersection with itself``
       ``Min and Max``
+      ``tryPick and Pick``
+      ``Union with itself``
+      ``Values are in order``
       Add
+      Collect
+      Forall
       Remove
       // ``Remove 2``
-    //   ``Add and Remove``
-    //   ``Difference with itself``
-    //   ``Union with itself``
-    //   ``Intersection with itself``
-    //   ``tryPick and Pick``
-    //   forall
-    //   collect
        ]
