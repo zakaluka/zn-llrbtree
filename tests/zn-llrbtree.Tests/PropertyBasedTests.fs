@@ -199,8 +199,8 @@ let addTests =
       ``Values are in order``
       ``Min and Max``
       Add
-    //   Remove
-    //   ``Remove 2``
+      Remove
+      ``Remove 2``
     //   ``Add and Remove``
     //   ``Difference with itself``
     //   ``Union with itself``
