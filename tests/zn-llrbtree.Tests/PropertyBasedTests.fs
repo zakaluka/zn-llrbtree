@@ -4,6 +4,7 @@ open Expecto
 open Hedgehog
 open ZN.DataStructures
 
+/// Ensures that the data structure keeps the values sorted / in order.
 let ``Values are in order`` =
   testCase "Values are in order" <| fun _ ->
     property {
@@ -11,11 +12,13 @@ let ``Values are in order`` =
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
-      Expect.equal (LLRBTree.toList t) (LLRBTree.toList t |> List.sort)
+      Expect.equal (LLRBTree.toList t) (Array.sort g |> Array.toList)
         "Values are in order"
     }
     |> Property.check
 
+/// Ensures that `min` and `max` find the lowest and highest values,
+/// respectively.
 let ``Min and Max`` =
   testCase "Min and Max" <| fun _ ->
     property {
@@ -23,18 +26,17 @@ let ``Min and Max`` =
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
-      Expect.equal (LLRBTree.min t) (LLRBTree.toList t |> List.min) "Min"
-      Expect.equal (LLRBTree.max t) (LLRBTree.toList t |> List.max) "Max"
+      Expect.equal (LLRBTree.min t) (Array.min g) "Min"
+      Expect.equal (LLRBTree.max t) (Array.max g) "Max"
       if LLRBTree.min t = LLRBTree.max t then
-        Expect.equal (LLRBTree.toList t |> List.min)
-          (LLRBTree.toList t |> List.max) "Min = Max"
+        Expect.equal (Array.min g) (Array.max g) "Min = Max"
       if LLRBTree.min t < LLRBTree.max t then
-        Expect.isLessThan (LLRBTree.toList t |> List.min)
-          (LLRBTree.toList t |> List.max) "Min < Max"
+        Expect.isLessThan (Array.min g) (Array.max g) "Min < Max"
       if LLRBTree.min t > LLRBTree.max t then failwith "Min > Max"
     }
     |> Property.check
 
+/// Tests the `ofArray` function.
 let Add =
   testCase "Add" <| fun _ ->
     property {
@@ -43,10 +45,13 @@ let Add =
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
       Expect.equal (LLRBTree.count t) (Array.distinct g |> Array.length)
-        "Add equal"
+        "Add equal counts"
+      Expect.equal (LLRBTree.toArray t) (Array.distinct g |> Array.sort)
+        "Add equal contents"
     }
     |> Property.check
 
+/// Test the `remove` function.
 let Remove =
   testCase "Remove" <| fun _ ->
     property {
@@ -58,20 +63,6 @@ let Remove =
       let t2 = Array.fold (fun acc elt -> LLRBTree.remove elt acc) t g
       Expect.equal (LLRBTree.count t2) 0 "Remove count"
       Expect.equal t2 LLRBTree.empty "Remove tree"
-    }
-    |> Property.check
-
-let ``Remove 2`` =
-  testCase "Remove 2" <| fun _ ->
-    property {
-      let! g = Gen.array <| Range.exponential 0 5000
-               <| Gen.int
-                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
-      let t =
-        Array.fold (fun acc elt -> LLRBTree.add elt acc) LLRBTree.empty g
-      let t2 = Array.foldBack LLRBTree.remove g t
-      Expect.equal (LLRBTree.count t2) 0 "Remove 2 count"
-      Expect.equal t2 LLRBTree.empty "Remove 2 tree"
     }
     |> Property.check
 
@@ -192,20 +183,32 @@ let ``Intersection with itself`` =
     }
     |> Property.check
 
+let ``Fold and FoldBack`` =
+  testCase "Fold and FoldBack" <| fun _ ->
+    property {
+      let! g= Gen.array<| Range.exponential 1 5000 <| Gen.int (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+      let t = LLRBTree.ofArray g
+      let t1 = LLRBTree.fold (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
+      let t2 = LLRBTree.foldBack LLRBTree.add t LLRBTree.empty
+
+      Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2) "Fold and FoldBack"
+    }
+    |> Property.check
+
 [<Tests>]
 let addTests =
   testList "Property-Based Tests"
     [
+      Add
       ``Add and Remove``
+      Collect
+      ``Fold and FoldBack``
+      Forall
       ``Difference with itself``
       ``Intersection with itself``
       ``Min and Max``
+      Remove
       ``tryPick and Pick``
       ``Union with itself``
       ``Values are in order``
-      Add
-      Collect
-      Forall
-      Remove
-      // ``Remove 2``
        ]
