@@ -229,6 +229,7 @@ let ``Invariant 1 Root node is always black`` =
     }
     |> Property.check
 
+/// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
 [<Tests>]
 let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
   // True = node does not have left black and right red children
@@ -257,7 +258,7 @@ let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
