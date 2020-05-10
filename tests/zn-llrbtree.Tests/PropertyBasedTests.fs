@@ -275,6 +275,10 @@ let ``fold and fold' have the same behavior`` =
 
       Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
         "List from trees are identical"
+
+      // The following line fails on macOS on .NET Core SDK 3.1.201, passes
+      // all other checks (.NET Core 3.1.201 / .NET 4.8 on Linux and Windows,
+      // .NET 4.8 on macOS)
       // Expect.equal t1 t2 "Trees are identical"
 
       let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
