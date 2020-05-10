@@ -275,10 +275,10 @@ let ``fold and fold' have the same behavior`` =
 
       Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
         "List from trees are identical"
-      Expect.equal t1 t2 "Trees are identical"
+      // Expect.equal t1 t2 "Trees are identical"
 
-      // let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
-      // let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
-      // Expect.equal t3 t4 "Lists based on +1 are identical"
+      let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
+      let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
+      Expect.equal t3 t4 "Lists based on +1 are identical"
     }
     |> Property.check
