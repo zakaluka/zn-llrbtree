@@ -1,6 +1,6 @@
 name: Build master
 
-# Only build on push for master branch. Remaining branches build within contxt
+# Only build on push for master branch. Remaining branches build within context
 # of pull request.
 on:
   push:
