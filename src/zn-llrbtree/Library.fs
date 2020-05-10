@@ -18,10 +18,14 @@ module LLRBTree =
   let public empty = E
 
   /// Get the color of the node.
-  let getColor = function | E -> B | T(c,_,_,_) -> c
+  let getColor =
+    function
+    | E -> B
+    | T(c,_,_,_) -> c
 
   /// Determines if a node represents a leaf (two `E` children)
-  let isLeaf = function
+  let isLeaf =
+    function
     | T(_,l,v,r) -> l = E && r = E
     | E -> false
 
@@ -210,19 +214,18 @@ module LLRBTree =
     // Helper that uses a heap-based manual stack
     let rec helper acc' stack =
       // Anything left to process?
-      match stack  with
+      match stack with
       | [] -> acc'
-      | hd::tl ->
-        // If current node is `E`, move on to next item in stack
-        match hd with
-        | E -> helper acc' tl
-        | T(_, l, v, r) ->
-          // Is there anything to the left?
-          match l with
-          | E ->
-            helper (func acc' v) (r :: tl )
-          | T(_) -> helper acc' (l :: (T(R, E, v, r)) :: tl )
-    helper acc [t]
+      | hd :: tl ->
+          // If current node is `E`, move on to next item in stack
+          match hd with
+          | E -> helper acc' tl
+          | T(_,l,v,r) ->
+              // Is there anything to the left?
+              match l with
+              | E -> helper (func acc' v) (r :: tl)
+              | T(_) -> helper acc' (l :: (T(R,E,v,r)) :: tl)
+    helper acc [ t ]
 
   /// Fold over the elements in a Tree from highest to lowest. This function is
   /// NOT tail-recursive.

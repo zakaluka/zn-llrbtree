@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/fantomas",
   "IndentOnTryWith": false,
   "IndentSpaceNum": 2,
-  "KeepNewlineAfter": false,
+  "KeepNewlineAfter": true,
   "MaxIfThenElseShortWidth": 80,
   "PageWidth": 80,
   "ReorderOpenDeclaration": true,

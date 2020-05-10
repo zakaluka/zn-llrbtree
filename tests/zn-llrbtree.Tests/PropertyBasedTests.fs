@@ -214,23 +214,29 @@ let ``Fold and FoldBack`` =
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
 [<Tests>]
 let ``Invariant 1 Root node is always black`` =
-  testCase "Invariant 1 Root node is always black" <| fun _->
+  testCase "Invariant 1 Root node is always black" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000 <| Gen.int (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+      let! g = Gen.array <| Range.exponential 0 5000
+               <| Gen.int
+                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
 
-      Expect.equal (LLRBTree.ofArray g|> LLRBTree.getColor ) Color.B "Root node of PB tree is black"
-      Expect.equal (LLRBTree.getColor LLRBTree.empty ) Color.B "Root node of empty tree is black"
-      Expect.equal (LLRBTree.singleton 'x' |> LLRBTree.getColor) Color.B "Root of singleton is black"
+      Expect.equal (LLRBTree.ofArray g |> LLRBTree.getColor) Color.B
+        "Root node of PB tree is black"
+      Expect.equal (LLRBTree.getColor LLRBTree.empty) Color.B
+        "Root node of empty tree is black"
+      Expect.equal (LLRBTree.singleton 'x' |> LLRBTree.getColor) Color.B
+        "Root of singleton is black"
     }
     |> Property.check
 
 [<Tests>]
 let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
   // True = node does not have left black and right red children
-  let childChecker t=
+  let childChecker t =
     match t with
     | E -> true
-    | T(_,l,_,r) -> (LLRBTree.getColor l = B && LLRBTree.getColor r = R) |> not
+    | T(_,l,_,r) ->
+        (LLRBTree.getColor l = B && LLRBTree.getColor r = R) |> not
 
   // Walks through the tree and performs operations on nodes instead of values
   let rec foldNodes func acc t =
@@ -238,31 +244,40 @@ let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
     | E -> acc
     | T(_,l,_,r) -> foldNodes func (foldNodes func (func acc t) l) r
 
-  testCase "Invariant 4 Node cannot have Left Black and Right Red children" <| fun _->
+  testCase "Invariant 4 Node cannot have Left Black and Right Red children" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000 <| Gen.int (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+      let! g = Gen.array <| Range.exponential 0 5000
+               <| Gen.int
+                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let result =
         LLRBTree.ofArray g
         |> foldNodes (fun acc e -> acc && (childChecker e)) true
 
       Expect.isTrue result "Invariant 4"
-    } |> Property.check
+    }
+    |> Property.check
 
 [<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000 <| Gen.int (Range.constant System.Int32.MinValue (System.Int32.MaxValue-1))
-      let t= LLRBTree.ofArray g
+      let! g = Gen.array <| Range.exponential 0 5000
+               <| Gen.int
+                    (Range.constant System.Int32.MinValue
+                       (System.Int32.MaxValue - 1))
+      let t = LLRBTree.ofArray g
 
       let t1 =
         LLRBTree.fold (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
-      let t2 = LLRBTree.fold' (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
+      let t2 =
+        LLRBTree.fold' (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
 
-      Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2) "List from trees are identical"
+      Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
+        "List from trees are identical"
       Expect.equal t1 t2 "Trees are identical"
 
-      let t3 = LLRBTree.fold (fun acc e -> (e+1)::acc) [] t
-      let t4 = LLRBTree.fold' (fun acc e -> (e+1)::acc) [] t
+      let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
+      let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
       Expect.equal t3 t4 "Lists based on +1 are identical"
-    }|>Property.check
+    }
+    |> Property.check
