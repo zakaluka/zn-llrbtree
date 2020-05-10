@@ -258,7 +258,7 @@ let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
@@ -277,8 +277,8 @@ let ``fold and fold' have the same behavior`` =
         "List from trees are identical"
       Expect.equal t1 t2 "Trees are identical"
 
-      let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
-      let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
-      Expect.equal t3 t4 "Lists based on +1 are identical"
+      // let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
+      // let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
+      // Expect.equal t3 t4 "Lists based on +1 are identical"
     }
     |> Property.check
