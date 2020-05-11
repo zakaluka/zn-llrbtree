@@ -258,7 +258,7 @@ let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
@@ -268,13 +268,13 @@ let ``fold and fold' have the same behavior`` =
                        (System.Int32.MaxValue - 10))
       let t = LLRBTree.ofArray g
 
-      // let t1 =
-      //   LLRBTree.fold (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
-      // let t2 =
-      //   LLRBTree.fold' (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
+      let t1 =
+        LLRBTree.fold (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
+      let t2 =
+        LLRBTree.fold' (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
 
-      // Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
-      //   "List from trees are identical"
+      Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
+        "List from trees are identical"
 
       // The following line fails on macOS on .NET Core SDK 3.1.201, passes
       // all other checks (.NET Core 3.1.201 / .NET 4.8 on Linux and Windows,
