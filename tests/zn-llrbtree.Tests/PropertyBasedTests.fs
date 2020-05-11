@@ -259,31 +259,32 @@ let ``Invariant 1 Root node is always black`` =
     |> Property.check
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
-// [<Tests>]
-// let ``Invariant 4 Node cannot have Left Black and Right Red child`` =
-//   // True = node does not have left black and right red children
-//   let childChecker t =
-//     match t with
-//     | E -> true
-//     | T(_,l,_,r) ->
-//         (LLRBTree.getColor l = B && LLRBTree.getColor r = R) |> not
+[<Tests>]
+let ``Invariant 4 Node cannot have Left Black and Right Red child`` =
+  // True = node does not have left black and right red children
+  let childChecker t =
+    match t with
+    | E -> true
+    | T(_,l,_,r) ->
+        (LLRBTree.getColor l = B && LLRBTree.getColor r = R) |> not
 
-//   // Walks through the tree and performs operations on nodes instead of values
-//   let rec foldNodes func acc t =
-//     match t with
-//     | E -> acc
-//     | T(_,l,_,r) -> foldNodes func (foldNodes func (func acc t) l) r
+  // Walks through the tree and performs operations on nodes instead of values
+  let rec foldNodes func acc t =
+    match t with
+    | E -> acc
+    | T(_,l,_,r) ->
+      foldNodes func (func (foldNodes func acc l ) t) r
 
-//   testCase "Invariant 4 Node cannot have Left Black and Right Red child" <| fun _ ->
-//     property {
-//       let! g = Gen.array <| Range.exponential 0 3000
-//                <| Gen.int
-//                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
-//       let result =
-//         LLRBTree.ofArray g
-//         |> foldNodes (fun acc e -> acc && (childChecker e)) true
+  testCase "Invariant 4 Node cannot have Left Black and Right Red child" <| fun _ ->
+    property {
+      let! g = Gen.array <| Range.exponential 0 3000
+               <| Gen.int
+                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+      let result =
+        LLRBTree.ofSeq g
+        |> foldNodes (fun acc node -> acc && (childChecker node)) true
 
-//       Expect.isTrue result "Invariant 4"
-//     }
-//     |> Property.check
+      Expect.isTrue result "Invariant 4, no left Black and right Red child"
+    }
+    |> Property.check
 
