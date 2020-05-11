@@ -162,7 +162,7 @@ let Forall =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let Collect =
   testCase "Collect" <| fun _ ->
     property {
