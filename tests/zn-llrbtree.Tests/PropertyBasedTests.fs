@@ -194,7 +194,7 @@ let ``Intersection with itself`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``Fold and FoldBack`` =
   testCase "Fold and FoldBack" <| fun _ ->
     property {
