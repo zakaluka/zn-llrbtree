@@ -17,6 +17,7 @@ Release to test DevOps
 Remediated property-based tests.
 
 ### Added
+
 - Added `fold'` - heap-based folding function.
 
 ## [0.1.0] - 2020-03-24
@@ -24,11 +25,11 @@ Remediated property-based tests.
 First release.  Based on the Elm implementation at https://github.com/Skinney/core/blob/a2ae7fcc30bd1ca2d5c732f98f61e4fd1f7b288b/src/Dict.elm
 
 ### Added
+
 - Initial API for the tree
 - Unit tests for basic functionality
 - Property-based tests
 
-[Unreleased]: https://github.com/zakaluka/zn-llrbtree/compare/v0.2.2...HEAD
-[0.2.2]: https://github.com/zakaluka/zn-llrbtree/compare/v0.2.1...v0.2.2
+[Unreleased]: https://github.com/zakaluka/zn-llrbtree/compare/v0.2.1...HEAD
 [0.2.1]: https://github.com/zakaluka/zn-llrbtree/compare/v0.1.0...v0.2.1
 [0.1.0]: https://github.com/zakaluka/zn-llrbtree.git/releases/tag/v0.1.0
