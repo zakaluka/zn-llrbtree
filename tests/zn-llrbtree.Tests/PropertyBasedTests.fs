@@ -211,23 +211,52 @@ let ``Fold and FoldBack`` =
     }
     |> Property.check
 
-/// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
-// [<Tests>]
-// let ``Invariant 1 Root node is always black`` =
-//   testCase "Invariant 1 Root node is always black" <| fun _ ->
-//     property {
-//       let! g = Gen.array <| Range.exponential 0 2000
-//                <| Gen.int
-//                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+[<Tests>]
+let ``fold and fold' have the same behavior`` =
+  testCase "fold and fold' for all integers" <| fun _ ->
+    property {
+      let! g = Gen.array <| Range.exponential 0 2000
+               <| Gen.int
+                    (Range.constant System.Int32.MinValue
+                       (System.Int32.MaxValue - 10))
+      let t = LLRBTree.ofArray g
 
-//       Expect.equal (LLRBTree.ofArray g |> LLRBTree.getColor) Color.B
-//         "Root node of PB tree is black"
-//       Expect.equal (LLRBTree.getColor LLRBTree.empty) Color.B
-//         "Root node of empty tree is black"
-//       Expect.equal (LLRBTree.singleton 'x' |> LLRBTree.getColor) Color.B
-//         "Root of singleton is black"
-//     }
-//     |> Property.check
+      let t1 =
+        LLRBTree.fold (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
+      let t2 =
+        LLRBTree.fold' (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
+
+      Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
+        "List from trees are identical"
+
+      // The following line fails on macOS on .NET Core SDK 3.1.201, passes
+      // all other checks (.NET Core 3.1.201 / .NET 4.8 on Linux and Windows,
+      // .NET 4.8 on macOS)
+      Expect.equal t1 t2 "Trees are identical"
+
+      let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
+      let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
+      Expect.equal t3 t4 "Lists based on +1 are identical"
+    }
+    |> Property.check
+
+/// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
+[<Tests>]
+let ``Invariant 1 Root node is always black`` =
+  testCase "Invariant 1 Root node is always black" <| fun _ ->
+    property {
+      let! g = Gen.array <| Range.exponential 0 2000
+               <| Gen.int
+                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+
+      Expect.equal (LLRBTree.ofArray g |> LLRBTree.getColor) Color.B
+        "Root node of PB tree is black"
+      Expect.equal (LLRBTree.getColor LLRBTree.empty) Color.B
+        "Root node of empty tree is black"
+      Expect.equal (LLRBTree.singleton 'x' |> LLRBTree.getColor) Color.B
+        "Root of singleton is black"
+    }
+    |> Property.check
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
 // [<Tests>]
@@ -258,31 +287,3 @@ let ``Fold and FoldBack`` =
 //     }
 //     |> Property.check
 
-[<Tests>]
-let ``fold and fold' have the same behavior`` =
-  testCase "fold and fold' for all integers" <| fun _ ->
-    property {
-      let! g = Gen.array <| Range.exponential 0 2000
-               <| Gen.int
-                    (Range.constant System.Int32.MinValue
-                       (System.Int32.MaxValue - 10))
-      let t = LLRBTree.ofArray g
-
-      let t1 =
-        LLRBTree.fold (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
-      let t2 =
-        LLRBTree.fold' (fun acc e -> LLRBTree.add e acc) LLRBTree.empty t
-
-      Expect.equal (LLRBTree.toList t1) (LLRBTree.toList t2)
-        "List from trees are identical"
-
-      // The following line fails on macOS on .NET Core SDK 3.1.201, passes
-      // all other checks (.NET Core 3.1.201 / .NET 4.8 on Linux and Windows,
-      // .NET 4.8 on macOS)
-      Expect.equal t1 t2 "Trees are identical"
-
-      let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
-      let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
-      Expect.equal t3 t4 "Lists based on +1 are identical"
-    }
-    |> Property.check
