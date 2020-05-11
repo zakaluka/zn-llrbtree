@@ -5,11 +5,11 @@ open Hedgehog
 open ZN.DataStructures
 
 /// Ensures that the data structure keeps the values sorted / in order.
-[<Tests>]
+// [<Tests>]
 let ``Values are in order`` =
   testCase "Values are in order" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 1 5000
+      let! g = Gen.array <| Range.exponential 1 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -20,11 +20,11 @@ let ``Values are in order`` =
 
 /// Ensures that `min` and `max` find the lowest and highest values,
 /// respectively.
-[<Tests>]
+// [<Tests>]
 let ``Min and Max`` =
   testCase "Min and Max" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 1 5000
+      let! g = Gen.array <| Range.exponential 1 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -39,11 +39,11 @@ let ``Min and Max`` =
     |> Property.check
 
 /// Tests the `ofArray` function.
-[<Tests>]
+// [<Tests>]
 let Add =
   testCase "Add" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -55,11 +55,11 @@ let Add =
     |> Property.check
 
 /// Test the `remove` function.
-[<Tests>]
+// [<Tests>]
 let Remove =
   testCase "Remove" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t =
@@ -70,14 +70,14 @@ let Remove =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``Add and Remove`` =
   testCase "Add and Remove" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
-      let! h = Gen.array <| Range.exponential 0 5000
+      let! h = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t =
@@ -93,11 +93,11 @@ let ``Add and Remove`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``Difference with itself`` =
   testCase "Difference with itself" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -107,11 +107,11 @@ let ``Difference with itself`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``Union with itself`` =
   testCase "Union with itself" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -122,11 +122,11 @@ let ``Union with itself`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``tryPick and Pick`` =
   testCase "tryPick and Pick" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -146,11 +146,11 @@ let ``tryPick and Pick`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let Forall =
   testCase "Forall" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 1 5000
+      let! g = Gen.array <| Range.exponential 1 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -162,11 +162,11 @@ let Forall =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let Collect =
   testCase "Collect" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 1 5000
+      let! g = Gen.array <| Range.exponential 1 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -178,11 +178,11 @@ let Collect =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``Intersection with itself`` =
   testCase "Intersection with itself" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -194,11 +194,11 @@ let ``Intersection with itself`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``Fold and FoldBack`` =
   testCase "Fold and FoldBack" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 1 5000
+      let! g = Gen.array <| Range.exponential 1 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let t = LLRBTree.ofArray g
@@ -213,50 +213,50 @@ let ``Fold and FoldBack`` =
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
 // [<Tests>]
-let ``Invariant 1 Root node is always black`` =
-  testCase "Invariant 1 Root node is always black" <| fun _ ->
-    property {
-      let! g = Gen.array <| Range.exponential 0 5000
-               <| Gen.int
-                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+// let ``Invariant 1 Root node is always black`` =
+//   testCase "Invariant 1 Root node is always black" <| fun _ ->
+//     property {
+//       let! g = Gen.array <| Range.exponential 0 2000
+//                <| Gen.int
+//                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
 
-      Expect.equal (LLRBTree.ofArray g |> LLRBTree.getColor) Color.B
-        "Root node of PB tree is black"
-      Expect.equal (LLRBTree.getColor LLRBTree.empty) Color.B
-        "Root node of empty tree is black"
-      Expect.equal (LLRBTree.singleton 'x' |> LLRBTree.getColor) Color.B
-        "Root of singleton is black"
-    }
-    |> Property.check
+//       Expect.equal (LLRBTree.ofArray g |> LLRBTree.getColor) Color.B
+//         "Root node of PB tree is black"
+//       Expect.equal (LLRBTree.getColor LLRBTree.empty) Color.B
+//         "Root node of empty tree is black"
+//       Expect.equal (LLRBTree.singleton 'x' |> LLRBTree.getColor) Color.B
+//         "Root of singleton is black"
+//     }
+//     |> Property.check
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
 // [<Tests>]
-let ``Invariant 4 Node cannot have Left Black and Right Red child`` =
-  // True = node does not have left black and right red children
-  let childChecker t =
-    match t with
-    | E -> true
-    | T(_,l,_,r) ->
-        (LLRBTree.getColor l = B && LLRBTree.getColor r = R) |> not
+// let ``Invariant 4 Node cannot have Left Black and Right Red child`` =
+//   // True = node does not have left black and right red children
+//   let childChecker t =
+//     match t with
+//     | E -> true
+//     | T(_,l,_,r) ->
+//         (LLRBTree.getColor l = B && LLRBTree.getColor r = R) |> not
 
-  // Walks through the tree and performs operations on nodes instead of values
-  let rec foldNodes func acc t =
-    match t with
-    | E -> acc
-    | T(_,l,_,r) -> foldNodes func (foldNodes func (func acc t) l) r
+//   // Walks through the tree and performs operations on nodes instead of values
+//   let rec foldNodes func acc t =
+//     match t with
+//     | E -> acc
+//     | T(_,l,_,r) -> foldNodes func (foldNodes func (func acc t) l) r
 
-  testCase "Invariant 4 Node cannot have Left Black and Right Red child" <| fun _ ->
-    property {
-      let! g = Gen.array <| Range.exponential 0 3000
-               <| Gen.int
-                    (Range.constant System.Int32.MinValue System.Int32.MaxValue)
-      let result =
-        LLRBTree.ofArray g
-        |> foldNodes (fun acc e -> acc && (childChecker e)) true
+//   testCase "Invariant 4 Node cannot have Left Black and Right Red child" <| fun _ ->
+//     property {
+//       let! g = Gen.array <| Range.exponential 0 3000
+//                <| Gen.int
+//                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
+//       let result =
+//         LLRBTree.ofArray g
+//         |> foldNodes (fun acc e -> acc && (childChecker e)) true
 
-      Expect.isTrue result "Invariant 4"
-    }
-    |> Property.check
+//       Expect.isTrue result "Invariant 4"
+//     }
+//     |> Property.check
 
 // [<Tests>]
 let ``fold and fold' have the same behavior`` =
