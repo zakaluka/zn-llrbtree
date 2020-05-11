@@ -216,7 +216,7 @@ let ``Fold and FoldBack`` =
 let ``Invariant 1 Root node is always black`` =
   testCase "Invariant 1 Root node is always black" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 2000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
 
@@ -230,7 +230,7 @@ let ``Invariant 1 Root node is always black`` =
     |> Property.check
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
-[<Tests>]
+// [<Tests>]
 let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
   // True = node does not have left black and right red children
   let childChecker t =
