@@ -212,7 +212,7 @@ let ``Fold and FoldBack`` =
     |> Property.check
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
-[<Tests>]
+// [<Tests>]
 let ``Invariant 1 Root node is always black`` =
   testCase "Invariant 1 Root node is always black" <| fun _ ->
     property {
@@ -258,7 +258,7 @@ let ``Invariant 4 Node cannot have Left Black and Right Red child`` =
     }
     |> Property.check
 
-[<Tests>]
+// [<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
