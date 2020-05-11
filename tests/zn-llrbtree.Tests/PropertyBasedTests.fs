@@ -107,7 +107,7 @@ let ``Difference with itself`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``Union with itself`` =
   testCase "Union with itself" <| fun _ ->
     property {
@@ -122,7 +122,7 @@ let ``Union with itself`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``tryPick and Pick`` =
   testCase "tryPick and Pick" <| fun _ ->
     property {
@@ -146,7 +146,7 @@ let ``tryPick and Pick`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let Forall =
   testCase "Forall" <| fun _ ->
     property {
