@@ -6,7 +6,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <Title>zn-llrbtree</Title>
-    <Description>Left-Leaning Red-Black Tree</Description>
+    <Description>Left-Leaning Red-Black Tree in F#</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
