@@ -7,14 +7,15 @@
   <PropertyGroup>
     <Title>zn-llrbtree</Title>
     <Description>Left-Leaning Red-Black Tree</Description>
-
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <Optimize>true</Optimize>
     <Tailcalls>true</Tailcalls>
-    
   </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Library.fs" />
   </ItemGroup>
