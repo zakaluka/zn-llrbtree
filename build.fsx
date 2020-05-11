@@ -64,6 +64,7 @@ let srcAndTest =
 let distDir = __SOURCE_DIRECTORY__  @@ "dist"
 let distGlob = distDir @@ "*.nupkg"
 
+// TODO increase percentage once tests are passing
 let coverageThresholdPercent = 80
 let coverageReportDir =  __SOURCE_DIRECTORY__  @@ "docs" @@ "coverage"
 
@@ -387,6 +388,7 @@ let dotnetTest ctx =
     let excludeCoverage =
         !! testsGlob
         |> Seq.map IO.Path.GetFileNameWithoutExtension
+        |> Seq.append ["FSharp.Core"]
         |> String.concat "|"
     let args =
         [

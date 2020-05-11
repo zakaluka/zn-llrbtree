@@ -1,6 +1,12 @@
 name: Build master
 
-on: [push, pull_request]
+# Only build on push for master branch. Remaining branches build within context
+# of pull request.
+on:
+  push:
+    branches:
+    - master
+  pull_request:
 
 jobs:
   build:
@@ -8,7 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnet: [3.1.100]
+        dotnet: [3.1.201]
+        # dotnet: [3.1.103]
     runs-on: ${{ matrix.os }}
 
     steps:
