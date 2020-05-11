@@ -258,7 +258,7 @@ let ``Fold and FoldBack`` =
 //     }
 //     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
