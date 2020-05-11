@@ -208,24 +208,36 @@ module LLRBTree =
     | T(_,l,v,r) -> fold func (func (fold func acc l) v) r
 
   /// Fold over the elements in a Tree from lowest to highest. This function
-  /// uses the heap instead of the call-stack - this avoids a Stack Overflow
-  /// Exception but could potentially cause an Out Of Memory Exception.
+  /// is tail recursive and uses the heap to manually track the remaining work
+  /// (aka simulating the call stack) - this avoids a Stack Overflow Exception
+  /// but could potentially cause an Out Of Memory Exception.
+  ///
+  /// https://en.wikibooks.org/wiki/F_Sharp_Programming/Mutable_Data
   let public fold' func acc t =
+    // Manual stack, stored on the heap
+    let stack = ref [ t ]
+
     // Helper that uses a heap-based manual stack
-    let rec helper acc' stack =
+    let rec helper acc' =
       // Anything left to process?
-      match stack with
+      match !stack with
       | [] -> acc'
       | hd :: tl ->
           // If current node is `E`, move on to next item in stack
           match hd with
-          | E -> helper acc' tl
+          | E ->
+              stack := tl
+              helper acc'
           | T(_,l,v,r) ->
               // Is there anything to the left?
               match l with
-              | E -> helper (func acc' v) (r :: tl)
-              | T(_) -> helper acc' (l :: (T(R,E,v,r)) :: tl)
-    helper acc [ t ]
+              | E ->
+                  stack := r :: tl
+                  helper(func acc' v)
+              | T(_) ->
+                  stack := l :: (T(R,E,v,r)) :: tl
+                  helper acc'
+    helper acc
 
   /// Fold over the elements in a Tree from highest to lowest. This function is
   /// NOT tail-recursive.
