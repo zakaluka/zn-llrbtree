@@ -55,7 +55,7 @@ let Add =
     |> Property.check
 
 /// Test the `remove` function.
-// [<Tests>]
+[<Tests>]
 let Remove =
   testCase "Remove" <| fun _ ->
     property {
@@ -70,7 +70,7 @@ let Remove =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``Add and Remove`` =
   testCase "Add and Remove" <| fun _ ->
     property {
@@ -93,7 +93,7 @@ let ``Add and Remove`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``Difference with itself`` =
   testCase "Difference with itself" <| fun _ ->
     property {
