@@ -178,7 +178,7 @@ let Collect =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``Intersection with itself`` =
   testCase "Intersection with itself" <| fun _ ->
     property {
