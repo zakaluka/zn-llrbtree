@@ -216,7 +216,7 @@ let ``Fold and FoldBack`` =
 let ``Invariant 1 Root node is always black`` =
   testCase "Invariant 1 Root node is always black" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 2000
+      let! g = Gen.array <| Range.exponential 0 5000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
 
@@ -231,7 +231,7 @@ let ``Invariant 1 Root node is always black`` =
 
 /// https://www.geeksforgeeks.org/left-leaning-red-black-tree-insertion/
 // [<Tests>]
-let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
+let ``Invariant 4 Node cannot have Left Black and Right Red child`` =
   // True = node does not have left black and right red children
   let childChecker t =
     match t with
@@ -245,9 +245,9 @@ let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
     | E -> acc
     | T(_,l,_,r) -> foldNodes func (foldNodes func (func acc t) l) r
 
-  testCase "Invariant 4 Node cannot have Left Black and Right Red children" <| fun _ ->
+  testCase "Invariant 4 Node cannot have Left Black and Right Red child" <| fun _ ->
     property {
-      let! g = Gen.array <| Range.exponential 0 5000
+      let! g = Gen.array <| Range.exponential 0 3000
                <| Gen.int
                     (Range.constant System.Int32.MinValue System.Int32.MaxValue)
       let result =
@@ -258,7 +258,7 @@ let ``Invariant 4 Node cannot have Left Black and Right Red children`` =
     }
     |> Property.check
 
-// [<Tests>]
+[<Tests>]
 let ``fold and fold' have the same behavior`` =
   testCase "fold and fold' for all integers" <| fun _ ->
     property {
@@ -279,7 +279,7 @@ let ``fold and fold' have the same behavior`` =
       // The following line fails on macOS on .NET Core SDK 3.1.201, passes
       // all other checks (.NET Core 3.1.201 / .NET 4.8 on Linux and Windows,
       // .NET 4.8 on macOS)
-      // Expect.equal t1 t2 "Trees are identical"
+      Expect.equal t1 t2 "Trees are identical"
 
       let t3 = LLRBTree.fold (fun acc e -> (e + 1) :: acc) [] t
       let t4 = LLRBTree.fold' (fun acc e -> (e + 1) :: acc) [] t
