@@ -5,7 +5,7 @@ open Hedgehog
 open ZN.DataStructures
 
 /// Ensures that the data structure keeps the values sorted / in order.
-// [<Tests>]
+[<Tests>]
 let ``Values are in order`` =
   testCase "Values are in order" <| fun _ ->
     property {
@@ -20,7 +20,7 @@ let ``Values are in order`` =
 
 /// Ensures that `min` and `max` find the lowest and highest values,
 /// respectively.
-// [<Tests>]
+[<Tests>]
 let ``Min and Max`` =
   testCase "Min and Max" <| fun _ ->
     property {
@@ -39,7 +39,7 @@ let ``Min and Max`` =
     |> Property.check
 
 /// Tests the `ofArray` function.
-// [<Tests>]
+[<Tests>]
 let Add =
   testCase "Add" <| fun _ ->
     property {
