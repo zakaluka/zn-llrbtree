@@ -4,20 +4,20 @@ open System.Reflection
 
 [<assembly: AssemblyTitleAttribute("zn-llrbtree")>]
 [<assembly: AssemblyProductAttribute("zn-llrbtree")>]
-[<assembly: AssemblyVersionAttribute("0.2.2")>]
+[<assembly: AssemblyVersionAttribute("0.2.3")>]
 [<assembly: AssemblyMetadataAttribute("ReleaseDate","2020-05-11T00:00:00.0000000-05:00")>]
-[<assembly: AssemblyFileVersionAttribute("0.2.2")>]
-[<assembly: AssemblyInformationalVersionAttribute("0.2.2")>]
+[<assembly: AssemblyFileVersionAttribute("0.2.3")>]
+[<assembly: AssemblyInformationalVersionAttribute("0.2.3")>]
 [<assembly: AssemblyMetadataAttribute("ReleaseChannel","release")>]
-[<assembly: AssemblyMetadataAttribute("GitHash","3c579edfaccc8e79bb04ad69aa0da6abe8a3441d")>]
+[<assembly: AssemblyMetadataAttribute("GitHash","8ec39e0174b226d2676f7e4662d0c8b62488fef0")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "zn-llrbtree"
     let [<Literal>] AssemblyProduct = "zn-llrbtree"
-    let [<Literal>] AssemblyVersion = "0.2.2"
+    let [<Literal>] AssemblyVersion = "0.2.3"
     let [<Literal>] AssemblyMetadata_ReleaseDate = "2020-05-11T00:00:00.0000000-05:00"
-    let [<Literal>] AssemblyFileVersion = "0.2.2"
-    let [<Literal>] AssemblyInformationalVersion = "0.2.2"
+    let [<Literal>] AssemblyFileVersion = "0.2.3"
+    let [<Literal>] AssemblyInformationalVersion = "0.2.3"
     let [<Literal>] AssemblyMetadata_ReleaseChannel = "release"
-    let [<Literal>] AssemblyMetadata_GitHash = "3c579edfaccc8e79bb04ad69aa0da6abe8a3441d"
+    let [<Literal>] AssemblyMetadata_GitHash = "8ec39e0174b226d2676f7e4662d0c8b62488fef0"
