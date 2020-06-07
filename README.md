@@ -1,6 +1,6 @@
 # zn-llrbtree
 
-Left-leaning red-black tree implementation in F#.  More information can be found on [Wikipedia](https://en.wikipedia.org/wiki/Left-leaning_red%E2%80%93black_tree).
+Left-leaning red-black tree implementation in F#.  Library documentation is hosted on [GitHub pages](https://zakaluka.github.io/zn-llrbtree/Api_Reference/zn-llrbtree/zn-llrbtree.html).  General information about left-leaning red-black trees can be found on [Wikipedia](https://en.wikipedia.org/wiki/Left-leaning_red%E2%80%93black_tree).
 
 ---
 
@@ -34,7 +34,7 @@ or
 
 ### Build Targets
 
-See `build.fsx` for the latest information.  The following should be corret, but there may be subtle differences.
+See `build.fsx` for the latest information.  The following should be correct, but there may be subtle differences.
 
 - `Clean` - Cleans artifact and temp directories.
 - `DotnetRestore` - Runs [dotnet restore](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore?tabs=netcore2x) on the [solution file](https://docs.microsoft.com/en-us/visualstudio/extensibility/internals/solution-dot-sln-file?view=vs-2019).
