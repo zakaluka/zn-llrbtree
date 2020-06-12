@@ -6,7 +6,7 @@ test: off
 version: 0.0.1.{build}
 image: Visual Studio 2019
 install:
-  - cmd: choco install dotnetcore-sdk -y
+  - cmd: choco install dotnetcore-sdk -y --version=3.1.201
 artifacts:
   - path: bin
     name: bin
